@@ -22,9 +22,12 @@ def userLogin(request):
 
 
 def account(request):
-    cookie = request.COOKIES.get('loghash', 'none')
+    cookie = request.COOKIES['loghash']
     if(cookie != 'none'):
         if(User.objects.filter(loghash=cookie).exists()):
             user = User.objects.get(loghash=cookie)
             return render(request, "account.html", {'user': user})
     return redirect(request, "login.html")
+
+def userUpload(request):
+    return render(request, "account_file.html")
